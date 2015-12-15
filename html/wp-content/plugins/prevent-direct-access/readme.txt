@@ -5,23 +5,23 @@ Tags: protect, files, photos, images, pdf, 301, 302, plugin, redirect, nofollow,
 Requires at least: 4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tested up to: 4.3
+Tested up to: 4.4
 Stable tag: 1.1
 
 A simple way to prevent search engines and the public from indexing and accessing your files without user authentication.
 
 == Description ==
-Prevent Direct Access is simple way to prevent search engines and the public from indexing and accessing your files without user authentication.
+Prevent Direct Access is simple way to prevent search engines and the public from indexing and accessing your files without complex user authentication.
 
 This plugin has the following functionalities:
 = Protect up to unlimited Uploaded Files =
-Prevent Direct Access is designed to protect your files such as images, pdf or video that you upload via WordPress Media or Post.
+Prevent Direct Access is designed to protect your files such as images, pdf or videos that you upload via WordPress Media or Post.
 
 Once protected, they cannot be accessed directly on the server. An error message will appear if others attempt to read and download these files.
 = Generate Private URL =
-Once a file is protected, the plugin will automatically generate a private URL containing random string for users to access the file. This private URL is the ONLY way to access the protected file.
+Once a file is protected, the plugin will automatically generate a private URL containing random string for the admin to access the file. This private URL is the ONLY way to access the protected file.
 
-Users can copy that private URL to clipboard and subsequently  pasting it on their browsers or email by clicking on the “Copy URL” button.
+Users can copy that private URL to clipboard and subsequently paste it on their browsers or email by clicking on the “Copy URL” button.
 
 If you need help with the plugin or you want to report a bug please refer to http://www.buildwps.com/prevent-direct-access/
 
@@ -56,7 +56,7 @@ Please refer to http://www.buildwps.com/prevent-direct-access/ for more informat
 
 == Changelog ==
 = 1.1 =
-* Remove 3 limited files option, currently can protect unlimited files.
+* Remove 3 protected files limit. The plugin can protect unlimited files now.
 * Change the way to get protected file path 
 * User can manually .htaccess file content by rules defined by plugin
 

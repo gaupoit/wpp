@@ -112,7 +112,7 @@ class Pda_Admin {
     public function add_upload_columns( $columns ) {
         $is_htaccess_writable = $this->pda_function->htaccess_writable();
         if($is_htaccess_writable === true){
-            $columns['direct_access'] = '<a href="#" onclick="customFile.pda_prevent_all().bind(this);">Prevent Direct Accesss</a>';
+            $columns['direct_access'] = 'Prevent Direct Access';
         }
         return $columns;
     }

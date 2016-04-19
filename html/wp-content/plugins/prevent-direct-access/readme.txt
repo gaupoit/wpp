@@ -1,4 +1,3 @@
-
 === Prevent Direct Access ===
 Contributors: duonghung1269, gaupoit
 Donate link: N/A
@@ -6,25 +5,28 @@ Tags: protect, files, photos, images, pdf, 301, 302, plugin, redirect, nofollow,
 Requires at least: 4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tested up to: 4.3
+Tested up to: 4.4
 Stable tag: 1.1
 
 A simple way to prevent search engines and the public from indexing and accessing your files without user authentication.
 
 == Description ==
-Prevent Direct Access is simple way to prevent search engines and the public from indexing and accessing your files without user authentication.
+Prevent Direct Access is simple way to prevent search engines and the public from indexing and accessing your files without complex user authentication.
+
 This plugin has the following functionalities:
 = Protect up to unlimited Uploaded Files =
-Prevent Direct Access is designed to protect your files such as images, pdf or video that you upload via WordPress Media or Post.
+Prevent Direct Access is designed to protect your files such as images, pdf or videos that you upload via WordPress Media or Post.
+
 Once protected, they cannot be accessed directly on the server. An error message will appear if others attempt to read and download these files.
 = Generate Private URL =
-Once a file is protected, the plugin will automatically generate a private URL containing random string for users to access the file. This private URL is the ONLY way to access the protected file.
-Users can copy that private URL to clipboard and subsequently  pasting it on their browsers or email by clicking on the “Copy URL” button.
+Once a file is protected, the plugin will automatically generate a private URL containing random string for the admin to access the file. This private URL is the ONLY way to access the protected file.
+
+Users can copy that private URL to clipboard and subsequently paste it on their browsers or email by clicking on the “Copy URL” button.
 
 If you need help with the plugin or you want to report a bug please refer to http://www.buildwps.com/prevent-direct-access/
 
-= Protected File Restrictions =
-This plugin restricts the maximum number of protected files to 3 for the free version. The premium version will offer unlimited protected files and some other extended features. Contact us at hello@buildwps.com to enquire more on the premium version.
+= Premium Version =
+The premium version helps you track the number of clicks (hits) on your private links; enables you to edit the private links and many other extended features. Contact us at hello@buildwps.com to enquire more on the premium version.
 
 
 == Installation ==
@@ -37,8 +39,11 @@ This plugin restricts the maximum number of protected files to 3 for the free ve
 First, the plugin only supports Apache HTTP Server ("httpd") at the moment. If you’re not using it, you may consider switching to httpd as it has been the most popular web server on the Internet since April 1996.
 
 Second, the plugin also needs to flush some mod_rewrite rules to your website’s .htaccess file to prevents direct access to your files on the server. In order for the plugin to work properly, you must either make the .htaccess file (located on your website root folder) writable or manually update our mod_rewrite rules to your htaccess.
-= Why do I see the popup box that says I can protect only 3 files? =
-The free version of this plugin offers protection to 3 files only. Contact us at hello@buildwps.com for the premium version, which offer unlimited protected files and other premium features.
+
+= Why do I see a warning message on top after activating the plugin? =
+It’s likely that your .htaccess is not writable. If that’s the case, you must either make it writable or manually update your .htaccess with the mod_rewrite rules found under Settings > Permalinks.
+
+Please refer to http://www.buildwps.com/prevent-direct-access/ for more information.
 
 == Screenshots ==
 1. Once you have installed the plugin, please click “Activate”
@@ -51,7 +56,7 @@ The free version of this plugin offers protection to 3 files only. Contact us at
 
 == Changelog ==
 = 1.1 =
-* Remove 3 limited files option, currently can protect unlimited files.
+* Remove 3 protected files limit. The plugin can protect unlimited files now.
 * Change the way to get protected file path 
 * User can manually .htaccess file content by rules defined by plugin
 
@@ -65,5 +70,3 @@ The free version of this plugin offers protection to 3 files only. Contact us at
 
 == Upgrade Notice ==
 N/A
-	
-

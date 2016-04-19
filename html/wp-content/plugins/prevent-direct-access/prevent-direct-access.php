@@ -53,7 +53,7 @@ class Pda_Admin {
         }
     }
 
-    public function check_htaccess_updated() {     
+    public function check_htaccess_updated() {
         $htaccess_writable = $this->pda_function->htaccess_writable();
 
         $plugin = plugin_basename(__FILE__);
@@ -66,10 +66,10 @@ class Pda_Admin {
         if ($updated_htaccess_success === true) {
             return;
         }
-          
+
         if ( $htaccess_writable === true && $is_plugin_active) {
             flush_rewrite_rules(); // re-trigger mod_rewrite_rules
-            add_option('updated_htaccess_success', true);          
+            add_option('updated_htaccess_success', true);
         }
     }
 
@@ -112,8 +112,8 @@ class Pda_Admin {
     public function add_upload_columns( $columns ) {
         $is_htaccess_writable = $this->pda_function->htaccess_writable();
         if($is_htaccess_writable === true){
-            $columns['direct_access'] = "Prevent Direct Access";
-        } 
+            $columns['direct_access'] = '<a href="#" onclick="customFile.pda_prevent_all().bind(this);">Prevent Direct Accesss</a>';
+        }
         return $columns;
     }
 
@@ -127,7 +127,7 @@ class Pda_Admin {
             return;
         }
     ?>
-         <label><input id="ckb_<?php
+         <label><input class="pda_cbk" id="ckb_<?php
         echo $post->ID
         ?>" <?php
         if ( $checked ) echo 'checked="checked"'; ?> onclick="customFile.preventFile('<?php

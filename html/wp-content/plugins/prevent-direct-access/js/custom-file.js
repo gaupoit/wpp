@@ -1,33 +1,34 @@
-(function() {
+(function(window, $) {
     var customFile = {
         preventFile: _preventFile,
         copyToClipboard: _copyToClipboard,
-        regeneratePrivateLink: _regeneratePrivateLink
+        regeneratePrivateLink: _regeneratePrivateLink,
+        pda_prevent_all: _pda_prevent_all
     };
 
     function _preventFile(fileId) {
         var checkBoxId = "#ckb_" + fileId;
-        var isPrevented = jQuery(checkBoxId).is(':checked') ? 1 : 0;
-        jQuery.ajax({
+        var isPrevented = $(checkBoxId).is(':checked') ? 1 : 0;
+        $.ajax({
             url: ajax_object.ajaxurl, // this is the object instantiated in wp_localize_script function
             type: 'POST',
             data: {
                 action: 'myaction',
                 id: fileId, // this is the function in your functions.php that will be triggered
                 is_prevented: isPrevented,
-                security_check: jQuery(checkBoxId).attr('nonce')
+                security_check: $(checkBoxId).attr('nonce')
             },
             success: function(data) {
                 //Do something with the result from server
                 if (typeof data.error !== 'undefined') {
-                    jQuery(checkBoxId).prop('checked', false);
+                    $(checkBoxId).prop('checked', false);
                     alert(data.error);
                 } else if (data == 'invalid_nonce') {
                     alert('No! No! No! Verify Nonce Fails!');
-                    if (jQuery(checkBoxId).is(':checked')) {
-                        jQuery(checkBoxId).prop('checked', false);
+                    if ($(checkBoxId).is(':checked')) {
+                        $(checkBoxId).prop('checked', false);
                     } else {
-                        jQuery(checkBoxId).prop('checked', true);
+                        $(checkBoxId).prop('checked', true);
                     }
                 } else {
                     var labelId = "#custom_url_" + data.post_id;
@@ -35,10 +36,10 @@
                     var divCustomUrlId = '#custom_url_div_' + data.post_id;
                     var custom_url_class = '.custom_url_' + data.post_id;
                     if (data.is_prevented === "1") {
-                        jQuery(custom_url_class).fadeIn();
-                        jQuery(labelId).val(data.url);
+                        $(custom_url_class).fadeIn();
+                        $(labelId).val(data.url);
                     } else {
-                        jQuery(custom_url_class).fadeOut();
+                        $(custom_url_class).fadeOut();
                     }
                 }
             },
@@ -50,38 +51,62 @@
     }
 
     function _regeneratePrivateLink(fileId) {
-    	var buttonId = "#btn_regenerate_" + fileId;
-    	var privateLinkInput = "#custom_url_" + fileId;
+        var buttonId = "#btn_regenerate_" + fileId;
+        var privateLinkInput = "#custom_url_" + fileId;
 
-        jQuery.ajax({
+        $.ajax({
             url: ajax_object.ajaxurl, // this is the object instantiated in wp_localize_script function
             type: 'POST',
             data: {
                 action: 'regenerate-url',
                 id: fileId, // this is the function in your functions.php that will be triggered
-                security_check: jQuery(buttonId).attr('nonce')
+                security_check: $(buttonId).attr('nonce')
             },
             success: function(data){
-            	jQuery(privateLinkInput).focus();
-            	jQuery(privateLinkInput).val(data.url);
+                $(privateLinkInput).focus();
+                $(privateLinkInput).val(data.url);
             },
             error: function(error){
-            	console.log("Errors", error);
-            	alert(error.responseText);
+                console.log("Errors", error);
+                alert(error.responseText);
             }
         });
     }
     window.customFile = customFile;
 
     function _copyToClipboard(btn, txt_input) {
-        var $temp = jQuery("<input>");
-        jQuery("body").append($temp);
-        $temp.val(jQuery(txt_input).val()).select();
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(txt_input).val()).select();
         document.execCommand("copy");
         $temp.remove();
-        jQuery(btn).text("URL Copied");
+        $(btn).text("URL Copied");
         setTimeout(function() {
-            jQuery(btn).text("Copy URL");
+            $(btn).text("Copy URL");
         }, 5000);
     }
-})(window);
+
+    function check_all_file_protected() {
+        var all_protected = true;
+        $('.pda_cbk').each(function() {
+            if($(this).attr('checked') !== "checked") {
+                all_protected = false;
+                return;
+            }
+        });
+        return all_protected;
+    }
+
+    function _pda_prevent_all(obj) {
+        var status = check_all_file_protected();
+        $('.pda_cbk').each(function() {
+            var checked = $(this).attr('checked');
+            if(status === false && checked !== "checked") {
+                $(this).trigger("click");
+            } else if(status === true && checked === "checked") {
+                $(this).trigger("click");
+            }
+        });
+    }
+
+})(window, jQuery);

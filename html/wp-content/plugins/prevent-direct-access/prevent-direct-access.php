@@ -57,7 +57,7 @@ class Pda_Admin {
         }
     }
 
-    public function check_htaccess_updated() {     
+    public function check_htaccess_updated() {
         $htaccess_writable = $this->pda_function->htaccess_writable();
 
         $plugin = plugin_basename(__FILE__);
@@ -70,10 +70,10 @@ class Pda_Admin {
         if ($updated_htaccess_success === true) {
             return;
         }
-          
+
         if ( $htaccess_writable === true && $is_plugin_active) {
             flush_rewrite_rules(); // re-trigger mod_rewrite_rules
-            add_option('updated_htaccess_success', true);          
+            add_option('updated_htaccess_success', true);
         }
     }
 
@@ -116,9 +116,9 @@ class Pda_Admin {
     public function add_upload_columns( $columns ) {
         $is_htaccess_writable = $this->pda_function->htaccess_writable();
         if($is_htaccess_writable === true){
-            $columns['direct_access'] = "Prevent Direct Access";
+            $columns['direct_access'] = '<a href="#" status="true" onclick="customFile.pda_prevent_all(this);">Prevent Direct Access</a>';
             $columns['hits_count'] = "Hits Count";
-        } 
+        }
         return $columns;
     }
 
@@ -128,9 +128,9 @@ class Pda_Admin {
         $advance_file = $repository->get_advance_file_by_post_id( $post->ID );
         $checked = isset( $advance_file ) && $advance_file->is_prevented;
         $url = isset( $advance_file ) && $checked ? site_url() . '/private/' . $advance_file->url : '';
-        if ( $column_name == 'direct_access' ) {           
+        if ( $column_name == 'direct_access' ) {
     ?>
-         <label><input id="ckb_<?php
+         <label><input class="pda_cbk" id="ckb_<?php
         echo $post->ID
         ?>" <?php
         if ( $checked ) echo 'checked="checked"'; ?> onclick="customFile.preventFile('<?php
@@ -150,7 +150,7 @@ class Pda_Admin {
             ?>" style="width: 80%"></div>
          <button id="btn_regenerate_<?php echo $post->ID?>" type="button" onclick="customFile.regeneratePrivateLink('<?php
             echo $post->ID
-            ?>'); return;" nonce="<?php echo wp_create_nonce('pda_ajax_nonce' . $post->ID); ?>">Regenerate URL</button>   
+            ?>'); return;" nonce="<?php echo wp_create_nonce('pda_ajax_nonce' . $post->ID); ?>">Regenerate URL</button>
          <button id="btn_copy" type="button" onclick="customFile.copyToClipboard(this, '#custom_url_<?php
             echo $post->ID
             ?>'); return;">Copy URL</button>
